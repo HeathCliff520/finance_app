@@ -4,6 +4,9 @@ import "./globals.css";
 
 
 import { ClerkProvider } from "@clerk/nextjs";
+import { QueryProviders } from "@/providers/query-provider";
+
+
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,7 +23,12 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html lang="en">
-       <body className={inter.className}>{children}</body>
+        <body className={inter.className}>
+          {/* 首页排除QueryProviders的渲染 */}
+          <QueryProviders>
+            {children}
+          </QueryProviders>
+        </body>
       </html>
     </ClerkProvider>
     
