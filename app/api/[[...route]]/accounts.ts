@@ -13,10 +13,10 @@ const accountsApiPage = new Hono()
         async (c) => {
             //验权
             const auth = getAuth(c);
-            if(!auth) {
+            if(!auth?.userId) {//用户未登录无用户ID，不予访问
                 throw new HTTPException(
                     401,
-                    { res: c.json({ error : "you have no unauthorized"},401)} 
+                    { res: c.json({ error : "you have unauthorized"},401)} 
                 ) 
             }
 
